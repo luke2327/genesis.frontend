@@ -23,29 +23,43 @@ const movies = [
   },
 ];
 
+interface YTMovie {
+  data: {
+    limit: number;
+    movie_count: number;
+    movies: Array<Record<any, string>>;
+    page_number: number;
+  };
+}
+
 const App: React.FC = (): JSX.Element => {
-  const [state, setState] = useState(0);
-  const check = (status: number) => status === 1;
+  const [state, setState] = useState<any>();
 
   useEffect(() => {
     fetch('https://yts.mx/api/v2/list_movies.json?%20sort_by=rating')
       .then(response => {
-        console.log(response.json());
-        setState(1);
-      })
+        if(!response.ok) {
+          throw new Error('not ok');
+        }
 
-      .catch(error => console.log(error));
+        return response.json() as Promise<YTMovie>;
+      }).then(re => {
+        setState(re.data.movies);
+      })
+      .catch(e => {
+        console.log(e);
+      });
   });
+
+  console.log(state);
 
   return (
     <div className="App">
-      {check(state) ? (
-        movies.map((movie, k) => (
-          <Movie title={movie.title} poster={movie.poster} key={k} />
-        ))
-      ) : (
-        <h1>loding...</h1>
-      )}
+      {
+        state !== undefined
+        ? state.map((v: any, k: number) => <Movie key={k} title={v.title} poster={v.medium_cover_image} />)
+        : 'loading'
+      }
     </div>
   );
 };
