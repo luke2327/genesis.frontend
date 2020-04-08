@@ -1,0 +1,118 @@
+{
+  "extends": [
+    "eslint:recommended",
+    "@typescript-eslint",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint"
+  ],
+  "plugins": ["react", "@typescript-eslint", "prettier"],
+  "env": {
+    "browser": true,
+    "jasmine": true,
+    "jest": true
+  },
+  "globals": {
+    "module": true
+  },
+  "rules": {
+    "prettier/prettier": ["error", { "singleQuote": true }],
+    /** use strict 무조건, 맨위 */
+    "strict": ["error", "global"],
+    /** var 금지 */
+    "no-var": ["error"],
+    /** console 경고 */
+    "no-console": ["warn"],
+    /** 예약어 또는 전역변수 선언 금지 */
+    "no-global-assign": ["error"],
+    /** 선언 후 바로 다시 선언 금지 */
+    "no-redeclare": ["error"],
+    /** 선언 후 미사용 금지 */
+    "no-unused-vars": ["error", { "vars": "all", "args": "after-used" }],
+    /** 쓸모없는 공간 금지 & 마지막 줄 공백 공간 마련 */
+    "no-multi-spaces": ["error", { "ignoreEOLComments": true }],
+    /** tab하고 space 혼합 금지 */
+    "no-mixed-spaces-and-tabs": ["error", "smart-tabs"],
+    /** 세미콜론 2개 같이쓰기 금지 */
+    "no-extra-semi": "error",
+    /** 쓸모없는 삼항연산자 금지 */
+    "no-unneeded-ternary": "error",
+    /** 선언 전 사용 금지, 단 함수는 허용 */
+    "no-use-before-define": ["error", { "functions": true }],
+    /** 줄바꿈 최대 1개까지 허용 */
+    "no-multiple-empty-lines": ["error", { "max": 1 }],
+    /** white space 금지 */
+    "no-trailing-spaces": ["error"],
+    /** 재사용이 없는건 무조건 const */
+    "prefer-const": ["error"],
+    /** 템플릿 리터럴 강제 */
+    "prefer-template": ["error"],
+    /** 템플릿 리터럴 내 white space 금지 */
+    "template-curly-spacing": ["error"],
+    /** 함수 사용할 때 공백 금지 */
+    "func-call-spacing": ["error", "never"],
+    /** 객체속성 쓸모없는 공백 제거 */
+    "computed-property-spacing": ["error", "never"],
+    /** 블록범위 패딩 */
+    "block-spacing": ["error"],
+    /** {a,b,c} X {a, b, c} O */
+    "comma-spacing": ["error", { "before": false, "after": true }],
+    /** { a:1, b:2 } X { a: 1, b: 2 } O */
+    "key-spacing": ["error"],
+    /** if() X if () O */
+    "keyword-spacing": ["error"],
+    /** {a: 1 } X { a: 1 } O */
+    "object-curly-spacing": ["error", "always"],
+    /** case: */
+    "switch-colon-spacing": ["error"],
+    /** const a ; X const a; O */
+    "semi-spacing": ["error", { "before": false, "after": true }],
+    /** => {} */
+    "arrow-spacing": ["error"],
+    /** 필요한 경우를 제외하면, 바로 리턴할 시 블록 스코프 생성 금지 */
+    "arrow-body-style": ["error", "as-needed"],
+    /** 엔터 후 . */
+    "dot-location": ["error", "property"],
+    /** 속성은 . */
+    "dot-notation": ["error"],
+    /** JSX 속성은 "로 작성 */
+    "jsx-quotes": ["error", "prefer-double"],
+    /** 주석 후 위 공백 공간 마련 */
+    "lines-around-comment": ["error", { "beforeBlockComment": true }],
+    "padding-line-between-statements": ["error", { "blankLine": "always", "prev": "*", "next": "return" }, { "blankLine": "always", "prev": ["const", "let", "var"], "next": "*" }, { "blankLine": "any", "prev": ["const", "let", "var"], "next": ["const", "let", "var"] }],
+    "space-before-blocks": "error",
+    "space-in-parens": ["error", "never"],
+    "space-infix-ops": ["error"],
+    "space-unary-ops": ["error"],
+    "spaced-comment": ["error", "always"],
+    /** ==, !=, ... X ===, !== O */
+    "eqeqeq": ["error"],
+    "curly": ["error"],
+    /** 기본적으로 모든 변수는 camelCase 단 PARTIAL_ 접두어 붙일 시 일시적 허용 */
+    "camelcase": ["error", { "properties": "never", "ignoreDestructuring": true, "ignoreImports": true, "allow": ["^PARTIAL_"] }],
+    /** 변수 indent 관련 */
+    "indent": ["error", 2, { "SwitchCase": 1, "VariableDeclarator": { "var": 2, "let": 2, "const": 3 }, "MemberExpression": 1 }],
+    "quotes": ["error", "single", { "avoidEscape": true }],
+    "quote-props": ["error", "consistent-as-needed"],
+    /** 세미콜론 강제 */
+    "semi": ["error", "always"],
+    "react/prop-types": 0
+  },
+  "settings": {
+    "react": {
+      "pragma": "React",
+      "version": "detect"
+    }
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  }
+}
