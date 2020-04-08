@@ -1,41 +1,48 @@
-import React,{useState} from 'react';
+import React ,{useState,useEffect}from 'react';
 import './App.css';
 import Movie from './movie';
-
-
 
 /** 기본적으로 functional 컴포넌트를 사용 */
 /** class 컴포넌트에 비해 가볍다 */
 /** function App() {  << 이것과 같은 의미 */
-const movies = [
-  {
-    title:"예끔 하이",
-    poster:"URL 자리",
-  },
-  {
-    title:"원석 하이",
-    poster:"URL 자리",
-  },
-  {
-    title:"준서 하이",
-    poster:"URL 자리",
-  }
-];
+  const movies = [
+    {
+      title:"예끔 하이",
+      poster:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRNqxnmuvuEwDiYmKMtO1FJw5uMnjVfKnG5fbOm_ibD4AK6I6Fn&usqp=CAU",
+    },
+    {
+      title:"원석 하이",
+      poster:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRqpaZFjoQjLOWt6rZs43VoNCmaIFcVOnifBDm5Mr-Fq_oPCH1h&usqp=CAU",
+    },
+    {
+      title:"준서 하이",
+      poster:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTHu7_i5FBXO4tFDpi_8qMv17RC5IQX5rXNfKy810Zt8myK11sJ&usqp=CAU",
+    }];
+const App: React.FC = (): JSX.Element => { 
 
-const App: React.FC = (): JSX.Element => { /** App 은 React.FC 타입 이며, 이 함수의 반환 타입은 JSX.Element 라는 의미 */
-  return ( /** 그럼 이 리턴값의 타입은 JSX.Element 가 아닐 시 에러가 난다. 컴파일 전에 확인 및 디버깅 가능 */
+  const [state, setState] = useState(0);
+  const check = (status : number) => status === 1 ? true : false;
+
+  useEffect(() => {
+    fetch('https://yts.mx/api/v2/list_movies.json?%20sort_by=rating')
+    .then(response => 
+      {
+        console.log(response.json());
+        setState(1);
+      })
+      
+    .catch(error => console.log(error))
+  })
+
+  return (
     <div className="App">
-     {movies.map((movie) => 
-     {
-        
-      return <Movie title={movie.title} poster={movie.poster}/>
-     }
-     )}
+      {
+        check(state)
+          ? movies.map((movie,k) => <Movie title= {movie.title} poster = {movie.poster} key={k}/>)
+          : <h1>loding...</h1>
+      }
     </div>
   );
-
-  /** 위 문법은 html 과 비슷한 JSX 문법이다 */
 }
-/** export 한다 뭐를? App 을 근데 어디에? default 에 */
-/** export 방법은 es6 문법을 참고하면 좋을듯 */
+
 export default App;
